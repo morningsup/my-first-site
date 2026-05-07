@@ -16,6 +16,9 @@ export default function Home() {
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-[#22989D]">
             안녕하세요, [모연주]입니다
           </h1>
+          <p className="text-xl font-medium text-[#C84726]">
+            오늘 처음 인터넷에 사이트를 올렸어요!
+          </p>
           <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
             Looking for a starting point or more instructions? Head over to{" "}
             <a
