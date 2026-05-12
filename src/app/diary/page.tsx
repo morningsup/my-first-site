@@ -196,12 +196,25 @@ export default function DiaryPage() {
                   />
                 </div>
 
-                <div className="flex gap-4 pt-6">
-                  <button type="button" onClick={closeModal} className="flex-1 px-8 py-4 rounded-2xl font-bold text-muted-foreground bg-muted hover:bg-zinc-200 transition-colors">취소</button>
-                  <button type="submit" className="flex-[2] bg-primary text-white px-8 py-4 rounded-2xl font-bold hover:opacity-90 transition-opacity shadow-lg shadow-primary/20">
-                    {editingEntry ? "기록 수정 완료" : "오늘의 일기 올리기"}
-                  </button>
+                <div className="flex flex-col sm:flex-row gap-4 pt-6">
+                  <button type="button" onClick={closeModal} className="px-8 py-4 rounded-2xl font-bold text-muted-foreground bg-muted hover:bg-zinc-200 transition-colors order-last sm:order-first">취소</button>
+                  <div className="flex-1 flex gap-4">
+                    <button 
+                      type="button" 
+                      onClick={() => { alert("기능 준비 중: 선택한 시간에 글이 자동으로 올라갑니다."); closeModal(); }}
+                      className="flex-1 bg-white border-2 border-accent text-accent px-8 py-4 rounded-2xl font-bold hover:bg-accent/5 transition-colors shadow-sm"
+                    >
+                      예약하기
+                    </button>
+                    <button 
+                      type="submit" 
+                      className="flex-[1.5] bg-primary text-white px-8 py-4 rounded-2xl font-bold hover:opacity-90 transition-opacity shadow-lg shadow-primary/20"
+                    >
+                      {editingEntry ? "수정 완료" : "지금 올리기"}
+                    </button>
+                  </div>
                 </div>
+
               </form>
             </div>
           </div>
