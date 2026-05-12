@@ -118,9 +118,9 @@ export default function DiaryPage() {
       {isModalOpen && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
           <div className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-300" onClick={closeModal} />
-          <div className="relative w-full max-w-3xl bg-white rounded-[40px] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300">
-            <div className="p-10">
-              <div className="flex justify-between items-center mb-10">
+          <div className="relative w-full max-w-3xl bg-white rounded-[40px] shadow-2xl overflow-hidden animate-in zoom-in-95 duration-300 max-h-[90vh] flex flex-col">
+            <div className="p-8 md:p-10 overflow-y-auto">
+              <div className="flex justify-between items-center mb-8">
                 <h2 className="text-3xl font-black text-foreground tracking-tight">
                   {editingEntry ? "기록 수정" : "오늘의 기록 남기기"}
                 </h2>
@@ -135,13 +135,13 @@ export default function DiaryPage() {
                 {/* Author Selection */}
                 <div className="space-y-4">
                   <label className="text-sm font-bold text-muted-foreground uppercase tracking-widest ml-1">누가 쓰는 글인가요?</label>
-                  <div className="flex gap-4">
+                  <div className="flex gap-3 md:gap-4">
                     {(["아빠", "엄마", "지솔이"] as const).map((name) => (
                       <button
                         key={name}
                         type="button"
                         onClick={() => setAuthor(name)}
-                        className={`flex-1 py-4 rounded-2xl font-bold transition-all border-2 ${
+                        className={`flex-1 py-3.5 md:py-4 rounded-2xl font-bold transition-all border-2 ${
                           author === name 
                             ? "border-primary bg-primary/5 text-primary scale-105 shadow-sm" 
                             : "border-[var(--muted)] text-muted-foreground hover:border-primary/30"
@@ -154,7 +154,7 @@ export default function DiaryPage() {
                 </div>
 
                 {/* Title and Image Selection */}
-                <div className="grid md:grid-cols-3 gap-8">
+                <div className="grid md:grid-cols-3 gap-6 md:gap-8">
                   <div className="md:col-span-2 space-y-4">
                     <label className="text-sm font-bold text-muted-foreground uppercase tracking-widest ml-1">제목</label>
                     <input
@@ -162,7 +162,7 @@ export default function DiaryPage() {
                       placeholder="오늘 하루를 한마디로 표현한다면?"
                       value={title}
                       onChange={(e) => setTitle(e.target.value)}
-                      className="w-full p-5 rounded-2xl bg-muted/50 border-none focus:ring-2 focus:ring-primary/20 outline-none text-xl font-bold"
+                      className="w-full p-4 md:p-5 rounded-2xl bg-muted/50 border-none focus:ring-2 focus:ring-primary/20 outline-none text-xl font-bold"
                       required
                     />
                   </div>
@@ -191,33 +191,40 @@ export default function DiaryPage() {
                     placeholder="지솔이가 오늘 처음으로 혼자 걸었어요! 너무나 감격스러운 하루였습니다..."
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
-                    className="w-full p-6 rounded-[24px] bg-muted/50 border-none focus:ring-2 focus:ring-primary/20 outline-none resize-none text-lg leading-relaxed h-48"
+                    className="w-full p-5 md:p-6 rounded-[24px] bg-muted/50 border-none focus:ring-2 focus:ring-primary/20 outline-none resize-none text-lg leading-relaxed h-40 md:h-48"
                     required
                   />
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                  <button type="button" onClick={closeModal} className="px-8 py-4 rounded-2xl font-bold text-muted-foreground bg-muted hover:bg-zinc-200 transition-colors order-last sm:order-first">취소</button>
-                  <div className="flex-1 flex gap-4">
+                {/* Action Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-muted">
+                  <button 
+                    type="button" 
+                    onClick={closeModal} 
+                    className="px-8 py-4 rounded-2xl font-bold text-muted-foreground bg-muted hover:bg-zinc-200 transition-colors"
+                  >
+                    취소
+                  </button>
+                  <div className="flex-1 flex flex-col sm:flex-row gap-4">
                     <button 
                       type="button" 
                       onClick={() => { alert("기능 준비 중: 선택한 시간에 글이 자동으로 올라갑니다."); closeModal(); }}
-                      className="flex-1 bg-white border-2 border-accent text-accent px-8 py-4 rounded-2xl font-bold hover:bg-accent/5 transition-colors shadow-sm"
+                      className="flex-1 bg-white border-2 border-accent text-accent px-8 py-4 rounded-2xl font-bold hover:bg-accent/5 transition-colors shadow-sm whitespace-nowrap"
                     >
                       예약하기
                     </button>
                     <button 
                       type="submit" 
-                      className="flex-[1.5] bg-primary text-white px-8 py-4 rounded-2xl font-bold hover:opacity-90 transition-opacity shadow-lg shadow-primary/20"
+                      className="flex-[1.5] bg-primary text-white px-8 py-4 rounded-2xl font-bold hover:opacity-90 transition-opacity shadow-lg shadow-primary/20 whitespace-nowrap"
                     >
-                      {editingEntry ? "수정 완료" : "지금 올리기"}
+                      {editingPost ? "수정 완료" : "지금 올리기"}
                     </button>
                   </div>
                 </div>
-
               </form>
             </div>
           </div>
+
         </div>
       )}
 
